@@ -1,36 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iboukhss <iboukhss@student.42luxe...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 15:14:25 by iboukhss          #+#    #+#             */
-/*   Updated: 2023/12/14 15:14:38 by iboukhss         ###   ########.fr       */
+/*   Created: 2023/12/14 17:05:05 by iboukhss          #+#    #+#             */
+/*   Updated: 2023/12/14 17:13:07 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
-{
-	int	len;
+#include <unistd.h>
 
-	len = 0;
-	while (*str)
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int nb)
+{
+	int	r;
+
+	if (nb == -2147483648)
 	{
-		++len;
-		++str;
+		write(1, "-2147483648", 11);
+		return ;
 	}
-	return(len);
+	if (nb < 0)
+	{
+		nb = -nb;
+		ft_putchar('-');
+	}
+	r = nb % 10;
+	if (nb > 9)
+		ft_putnbr(nb / 10);
+	ft_putchar(r + '0');
 }
 
 /*
-#include <stdio.h>
-
 int	main(void)
 {
-	char	*str = "";
-	int		ret;
-	ret = ft_strlen(str);
-	printf("%d\n", ret);
+	ft_putnbr(2147483647);
 }
 */
